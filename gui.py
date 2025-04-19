@@ -1,6 +1,8 @@
 import pygame #type: ignore
 from solver import Solver
 from generator import Generator
+from buttons import Button
+import colors
 
 class Sudoku:
     def __init__(self):
@@ -19,7 +21,15 @@ class Sudoku:
         solver.solve()
         self.solved_board = solver.board
         
+        self.buttons = { Button(self.screen, (280, 600), 3, "Solve", self.solve_board, button_color=colors.GRAY),
+                         Button(self.screen, (280, 650), 3, "Generate", self.generate_board, button_color=colors.GRAY),
+                         Button(self.screen, (280, 700), 3, "Reset", self.reset_board, button_color=colors.GRAY)
+        }
         self.clock = pygame.time.Clock()
+
+    def solve_board(self): pass
+    def generate_board(self): pass
+    def reset_board(self): pass
 
     def run(self):
         running = True
@@ -30,6 +40,8 @@ class Sudoku:
 
             self.screen.fill((255, 255, 255))
             self.draw_board()
+            for i in self.buttons:
+                i.run()
             pygame.display.update()
             self.clock.tick(60)
 
@@ -46,6 +58,7 @@ class Sudoku:
         board_height = self.size * 40
         offset_x = (600 - board_width) // 2
         offset_y = 100
+        pygame.draw.rect(self.screen, (240, 240, 240), (offset_x, offset_y, board_width, board_height), 0)
         pygame.draw.rect(self.screen, (0, 0, 0), (offset_x, offset_y, board_width, board_height), 2)
 
         # Draw the grid lines

@@ -2,9 +2,9 @@ import pygame # type: ignore
 import colors
 
 class Button:
-    def __init__(self, screen, loc, width, name, func, text_color, button_color = colors.WHITE, button_img = None, fixed_size = None, tiny = False, hover = "highlight"):
-        self.regular_font = pygame.font.Font(".\\basic_types\\Roboto-Medium.ttf", 16)
-        self.tiny_font = pygame.font.Font(".\\basic_types\\Roboto-Medium.ttf", 8)
+    def __init__(self, screen, loc, width, name, func, text_color = colors.BLACK, button_color = colors.WHITE, button_img = None, fixed_size = None, tiny = False, hover = "highlight"):
+        self.regular_font = pygame.font.Font(".\\fonts\\basic_types\\Roboto-Medium.ttf", 16)
+        self.tiny_font = pygame.font.Font(".\\fonts\\basic_types\\Roboto-Medium.ttf", 8)
         self.screen = screen
         self.location = loc
         self.width = width
