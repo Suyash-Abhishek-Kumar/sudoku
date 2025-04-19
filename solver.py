@@ -60,12 +60,13 @@ class Solver:
                 print(self.board[i][j], end=" ")
             print("")
                 
-x = Solver([ [4, 0, 1, 0],
-             [0, 2, 0, 0],
-             [0, 0, 3, 0],
-             [0, 0, 0, 1] ], (2, 2))
-x.printBoard()
-print("")
-bo = x.solve()
-print(bo)
-x.printBoard()
+if __name__ == "__main__":
+    x = Solver([ [4, 0, 1, 0],
+                [0, 2, 0, 0],
+                [0, 0, 3, 0],
+                [0, 0, 0, 1] ], (2, 2))
+    x.printBoard()
+    print("")
+    bo = x.solve()
+    print(bo)
+    x.printBoard()
