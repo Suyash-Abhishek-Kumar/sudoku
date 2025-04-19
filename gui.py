@@ -8,6 +8,7 @@ class Sudoku:
         self.screen = pygame.display.set_mode((600, 800))
         pygame.display.set_caption("Sudoku")
         self.base_font = pygame.font.Font(None, 36)
+        self.heading_font = pygame.font.Font(".\\fonts\\ka1.ttf", 56)
         self.size = 9
         self.holes = 40
         self.block_size = (3, 3)
@@ -33,6 +34,11 @@ class Sudoku:
         pygame.quit()
 
     def draw_board(self):       # Draw the Sudoku board
+        # Draw the heading
+        heading_text = self.heading_font.render("Sudoku", True, (0, 0, 0))
+        heading_rect = heading_text.get_rect(center=(300, 50))
+        self.screen.blit(heading_text, heading_rect)
+
         # Draw the outer border of the Sudoku board
         board_width = self.size * 40
         board_height = self.size * 40
