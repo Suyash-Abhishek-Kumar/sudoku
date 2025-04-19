@@ -64,7 +64,7 @@ class Solver:
 
                 
 if __name__ == "__main__":
-    sample_board = [ [0, 0, 0, 1, 0, 0],
+    sample_6x6 = [ [0, 0, 0, 1, 0, 0],
                      [0, 4, 0, 0, 0, 5],
                      [0, 0, 3, 0, 6, 0],
                      [0, 2, 0, 3, 0, 0],
@@ -78,7 +78,7 @@ if __name__ == "__main__":
                   [0, 0, 0, 1]
     ]
 
-    x = Solver(sample2x2, (2, 2))
+    x = Solver(sample2x2, block_size=(2, 2))
     x.printBoard()
     print("")
     x.solve()
