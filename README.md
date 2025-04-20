@@ -112,4 +112,3 @@ pip install -r requirements.txt
 Created and maintained by **Suyash Abhishek Kumar**.
 
 Enjoy solving and mastering Sudoku! 🧩✨
-```
