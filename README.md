@@ -107,12 +107,6 @@ pip install -r requirements.txt
 
 ---
 
-## 📄 License
-
-This project is open source. See `LICENSE` for details.
-
----
-
 ## 🙏 Acknowledgements
 
 Created and maintained by **Suyash Abhishek Kumar**.
