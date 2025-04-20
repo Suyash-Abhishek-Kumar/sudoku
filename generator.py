@@ -6,7 +6,6 @@ class Generator(Solver):
         # Initialize an empty board
         board = [[0 for _ in range(size)] for _ in range(size)]
         super().__init__(board, block_size)
-        self.printBoard()
 
     def fill_diagonal_blocks(self):
         # Fill the diagonal blocks with random numbers
@@ -17,19 +16,18 @@ class Generator(Solver):
             random.shuffle(nums)
             for x in range(self.h):
                 for y in range(self.w):
-                    print(i + x, j + y)
                     self.board[i + x][j + y] = nums.pop()
     
     def bruteforce_fill(self):
         for i in range(self.size):
-                for j in range(self.size):
-                    if self.board[i][j] == 0:
-                        nums = list(range(1, self.size + 1))
-                        random.shuffle(nums)
-                        for num in nums:
-                            if self.valid(i, j, num):
-                                self.board[i][j] = num
-                                break
+            for j in range(self.size):
+                if self.board[i][j] == 0:
+                    nums = list(range(1, self.size + 1))
+                    random.shuffle(nums)
+                    for num in nums:
+                        if self.valid(i, j, num):
+                            self.board[i][j] = num
+                            break
 
     def remove_numbers(self, num_holes):
         # Remove numbers randomly to create the puzzle
@@ -48,8 +46,9 @@ class Generator(Solver):
         else:
             self.fill_diagonal_blocks()
             self.solve()            # Solve the board to ensure it's valid
+        copy_board = [row[:] for row in self.board]
         self.remove_numbers(num_holes)
-        return self.board
+        return self.board, copy_board
 
 if __name__ == "__main__":
     generator = Generator(size=8, block_size=(2, 4))
