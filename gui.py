@@ -7,8 +7,9 @@ import random
 class Sudoku:
     def __init__(self):
         pygame.init()
-        self.screen = pygame.display.set_mode((600, 600))
+        self.screen = pygame.display.set_mode((450, 600))
         pygame.display.set_caption("Sudoku")
+        pygame.display.set_icon(pygame.image.load(".\\sudoku_icon.png"))
         self.base_font = pygame.font.Font(None, 36)
         self.tiny_font = pygame.font.Font(None, 16)
         self.heading_font = pygame.font.Font(".\\fonts\\ka1.ttf", 56)
@@ -16,10 +17,10 @@ class Sudoku:
         self.holes = random.randint(40, 60)
         self.block_size = (3, 3)
         self.board, self.solved_board = Generator(size=self.size, block_size=self.block_size).generate(num_holes=self.holes)
-        self.buttons = { Button(self.screen, (180, 500), 3, "Solve", self.solve_board, text_color= colors.WHITE, button_color=colors.update_brightness(colors.GRAY, 30), hover="darken"),
-                         Button(self.screen, (180, 550), 3, "Check", self.check_board, text_color= colors.WHITE, button_color=colors.update_brightness(colors.GRAY, 30), hover="darken"),
-                         Button(self.screen, (380, 500), 3, "Generate", self.generate_board, text_color= colors.WHITE, button_color=colors.update_brightness(colors.GRAY, 30), hover="darken"),
-                         Button(self.screen, (380, 550), 3, "Reset", self.reset_board, text_color= colors.WHITE, button_color=colors.update_brightness(colors.GRAY, 30), hover="darken")
+        self.buttons = { Button(self.screen, (125, 500), 3, "Solve", self.solve_board, text_color= colors.WHITE, button_color=colors.update_brightness(colors.GRAY, 30), fixed_size=(100, 30)),
+                         Button(self.screen, (125, 550), 3, "Check", self.check_board, text_color= colors.WHITE, button_color=colors.update_brightness(colors.GRAY, 30), fixed_size=(100, 30)),
+                         Button(self.screen, (325, 500), 3, "Generate", self.generate_board, text_color= colors.WHITE, button_color=colors.update_brightness(colors.GRAY, 30), fixed_size=(100, 30)),
+                         Button(self.screen, (325, 550), 3, "Reset", self.reset_board, text_color= colors.WHITE, button_color=colors.update_brightness(colors.GRAY, 30), fixed_size=(100, 30))
         }
         self.input_board = [[0 for _ in range(self.size)] for _ in range(self.size)]
 
@@ -85,13 +86,13 @@ class Sudoku:
     def draw_board(self):       # Draw the Sudoku board
         # Draw the heading
         heading_text = self.heading_font.render("Sudoku", True, (0, 0, 0))
-        heading_rect = heading_text.get_rect(center=(300, 50))
+        heading_rect = heading_text.get_rect(center=(225, 50))
         self.screen.blit(heading_text, heading_rect)
 
         # Draw the outer border of the Sudoku board
         board_width = self.size * 40
         board_height = self.size * 40
-        offset_x = (600 - board_width) // 2
+        offset_x = (450 - board_width) // 2
         offset_y = 100
         pygame.draw.rect(self.screen, (240, 240, 240), (offset_x, offset_y, board_width, board_height), 0)
         pygame.draw.rect(self.screen, (0, 0, 0), (offset_x, offset_y, board_width, board_height), 2)

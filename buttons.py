@@ -8,7 +8,7 @@ class Button:
         self.screen = screen
         self.location = loc
         self.width = width
-        self.bold_width = self.width + 3
+        self.bold_width = self.width + 2
         self.width_copy = width
         self.button_color = button_color
         self.hover = hover
