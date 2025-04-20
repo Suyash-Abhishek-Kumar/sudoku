@@ -80,7 +80,7 @@ sudoku/
 ## 📦 Dependencies
 
 - Python 3.x  
-- `pygame` (and other modules listed in `requirements.txt`)
+- `pygame`
 
 Install all dependencies using:
 
