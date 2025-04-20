@@ -11,9 +11,9 @@ class Sudoku:
         pygame.display.set_caption("Sudoku")
         self.base_font = pygame.font.Font(None, 36)
         self.heading_font = pygame.font.Font(".\\fonts\\ka1.ttf", 56)
-        self.size = 9
-        self.holes = 40
-        self.block_size = (3, 3)
+        self.size = 6
+        self.holes = 20
+        self.block_size = (3, 2)
         self.board = Generator(size=self.size, block_size=self.block_size).generate(num_holes=self.holes)
 
         copy_board = [row[:] for row in self.board]  # Ensure a deep copy of the board
@@ -21,7 +21,7 @@ class Sudoku:
         solver.solve()
         self.solved_board = solver.board
         
-        self.buttons = { Button(self.screen, (280, 600), 3, "Solve", self.solve_board, text_color= colors.WHITE, button_color=colors.update_brightness(colors.GRAY, 30), hover="darken"),
+        self.buttons = { Button(self.screen, (280, 500), 3, "Solve", self.solve_board, text_color= colors.WHITE, button_color=colors.update_brightness(colors.GRAY, 30), hover="darken"),
                          Button(self.screen, (280, 650), 3, "Generate", self.generate_board, text_color= colors.WHITE, button_color=colors.update_brightness(colors.GRAY, 30), hover="darken"),
                          Button(self.screen, (280, 700), 3, "Reset", self.reset_board, text_color= colors.WHITE, button_color=colors.update_brightness(colors.GRAY, 30), hover="darken")
         }
@@ -31,7 +31,9 @@ class Sudoku:
     def solve_board(self): self.solve = True
     def reset_board(self): self.solve = False
     def generate_board(self):
+        self.solve = False
         self.board = Generator(size=self.size, block_size=self.block_size).generate(num_holes=self.holes)
+        print("generated")
         copy_board = [row[:] for row in self.board]  # Ensure a deep copy of the board
         solver = Solver(copy_board, self.block_size)
         solver.solve()
@@ -78,6 +80,9 @@ class Sudoku:
             line_width = 3 if i % self.block_size[0] == 0 else 1
             # Horizontal lines
             pygame.draw.line(self.screen, (0, 0, 0), (offset_x, offset_y + i * 40), (offset_x + board_width, offset_y + i * 40), line_width)
+
+        for i in range(self.size + 1):
+            line_width = 3 if i % self.block_size[1] == 0 else 1
             # Vertical lines
             pygame.draw.line(self.screen, (0, 0, 0), (offset_x + i * 40, offset_y), (offset_x + i * 40, offset_y + board_height), line_width)
 
