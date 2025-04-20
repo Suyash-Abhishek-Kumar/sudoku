@@ -7,7 +7,7 @@ import random
 class Sudoku:
     def __init__(self):
         pygame.init()
-        self.screen = pygame.display.set_mode((600, 800))
+        self.screen = pygame.display.set_mode((600, 600))
         pygame.display.set_caption("Sudoku")
         self.base_font = pygame.font.Font(None, 36)
         self.tiny_font = pygame.font.Font(None, 16)
@@ -16,10 +16,10 @@ class Sudoku:
         self.holes = random.randint(40, 60)
         self.block_size = (3, 3)
         self.board, self.solved_board = Generator(size=self.size, block_size=self.block_size).generate(num_holes=self.holes)
-        self.buttons = { Button(self.screen, (280, 550), 3, "Solve", self.solve_board, text_color= colors.WHITE, button_color=colors.update_brightness(colors.GRAY, 30), hover="darken"),
-                         Button(self.screen, (280, 600), 3, "Check", self.check_board, text_color= colors.WHITE, button_color=colors.update_brightness(colors.GRAY, 30), hover="darken"),
-                         Button(self.screen, (280, 650), 3, "Generate", self.generate_board, text_color= colors.WHITE, button_color=colors.update_brightness(colors.GRAY, 30), hover="darken"),
-                         Button(self.screen, (280, 700), 3, "Reset", self.reset_board, text_color= colors.WHITE, button_color=colors.update_brightness(colors.GRAY, 30), hover="darken")
+        self.buttons = { Button(self.screen, (180, 500), 3, "Solve", self.solve_board, text_color= colors.WHITE, button_color=colors.update_brightness(colors.GRAY, 30), hover="darken"),
+                         Button(self.screen, (180, 550), 3, "Check", self.check_board, text_color= colors.WHITE, button_color=colors.update_brightness(colors.GRAY, 30), hover="darken"),
+                         Button(self.screen, (380, 500), 3, "Generate", self.generate_board, text_color= colors.WHITE, button_color=colors.update_brightness(colors.GRAY, 30), hover="darken"),
+                         Button(self.screen, (380, 550), 3, "Reset", self.reset_board, text_color= colors.WHITE, button_color=colors.update_brightness(colors.GRAY, 30), hover="darken")
         }
         self.input_board = [[0 for _ in range(self.size)] for _ in range(self.size)]
 
