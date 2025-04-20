@@ -25,7 +25,7 @@ class Sudoku:
         self.input_board = [[0 for _ in range(self.size)] for _ in range(self.size)]
 
         board_width = self.size * 40
-        offset_x = (600 - board_width) // 2
+        offset_x = (450 - board_width) // 2
         offset_y = 100
         self.coords = [[(j * 40 + offset_x, i * 40 + offset_y, j * 40 + offset_x + 40, i * 40 + offset_y + 40) for i in range(self.size)] for j in range(self.size)]
         self.selected = None
