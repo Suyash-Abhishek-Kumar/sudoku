@@ -24,10 +24,8 @@ class Button:
 
         if fixed_size:
             self.box_rect = pygame.Rect(loc, fixed_size)
-            self.box_rect.size = fixed_size
         else:
-            self.box_rect = pygame.Rect(loc, (self.name_rect.size[0] + 10, self.name_rect.size[1] + 7))
-            self.box_rect = self.name.get_rect()
+            self.box_rect = pygame.Rect(loc, (self.name_rect.size[0] + 15, self.name_rect.size[1] + 2))
 
         self.name_size = self.name_rect.size
         self.name_rect.center = self.location
@@ -45,11 +43,11 @@ class Button:
         if self.img:
             self.screen.blit(self.img, self.box_rect)
         else:
-            pygame.draw.rect(self.screen, self.back_color, self.box_rect, border_radius=10)
+            pygame.draw.rect(self.screen, self.back_color, self.box_rect, border_radius=7)
             if self.hover == "darken" and self.width == -1:
-                pygame.draw.rect(self.screen, self.button_color, self.box_rect, 0, border_radius=10)
+                pygame.draw.rect(self.screen, self.button_color, self.box_rect, 0, border_radius=7)
             if self.hover == "highlight":
-                pygame.draw.rect(self.screen, self.button_color, self.box_rect, self.width, border_radius=10)
+                pygame.draw.rect(self.screen, self.button_color, self.box_rect, self.width, border_radius=7)
         if self.neg:
             self.screen.blit(self.name_negative, self.name_rect)
         else:

@@ -21,15 +21,21 @@ class Sudoku:
         solver.solve()
         self.solved_board = solver.board
         
-        self.buttons = { Button(self.screen, (280, 600), 3, "Solve", self.solve_board, button_color=colors.GRAY),
-                         Button(self.screen, (280, 650), 3, "Generate", self.generate_board, button_color=colors.GRAY),
-                         Button(self.screen, (280, 700), 3, "Reset", self.reset_board, button_color=colors.GRAY)
+        self.buttons = { Button(self.screen, (280, 600), 3, "Solve", self.solve_board, text_color= colors.WHITE, button_color=colors.update_brightness(colors.GRAY, 30), hover="darken"),
+                         Button(self.screen, (280, 650), 3, "Generate", self.generate_board, text_color= colors.WHITE, button_color=colors.update_brightness(colors.GRAY, 30), hover="darken"),
+                         Button(self.screen, (280, 700), 3, "Reset", self.reset_board, text_color= colors.WHITE, button_color=colors.update_brightness(colors.GRAY, 30), hover="darken")
         }
+        self.solve = False
         self.clock = pygame.time.Clock()
 
-    def solve_board(self): pass
-    def generate_board(self): pass
-    def reset_board(self): pass
+    def solve_board(self): self.solve = True
+    def reset_board(self): self.solve = False
+    def generate_board(self):
+        self.board = Generator(size=self.size, block_size=self.block_size).generate(num_holes=self.holes)
+        copy_board = [row[:] for row in self.board]  # Ensure a deep copy of the board
+        solver = Solver(copy_board, self.block_size)
+        solver.solve()
+        self.solved_board = solver.board
 
     def run(self):
         running = True
@@ -37,6 +43,12 @@ class Sudoku:
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     running = False
+                elif event.type == pygame.MOUSEBUTTONDOWN:
+                    if event.button == 1:
+                        for j in self.buttons:
+                            if j.collision_check():
+                                j.function()
+                                continue
 
             self.screen.fill((255, 255, 255))
             self.draw_board()
@@ -74,9 +86,10 @@ class Sudoku:
             for j in range(self.size):
                 if self.board[i][j] != 0:
                     text = self.base_font.render(str(self.board[i][j]), True, (0, 0, 0))
-                else:
+                    self.screen.blit(text, (offset_x + j * 40 + 15, offset_y + i * 40 + 10))
+                elif self.solve:
                     text = self.base_font.render(str(self.solved_board[i][j]), True, (255, 0, 0))
-                self.screen.blit(text, (offset_x + j * 40 + 15, offset_y + i * 40 + 10))
+                    self.screen.blit(text, (offset_x + j * 40 + 15, offset_y + i * 40 + 10))
 
 x = Sudoku()
 x.run()
